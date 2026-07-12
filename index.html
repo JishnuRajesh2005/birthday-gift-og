@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, My Love</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <canvas id="particles-canvas"></canvas>
+    
+    <div id="app">
+        <!-- PAGE 1: Landing -->
+        <section id="page-landing" class="page active">
+            <div class="landing-content">
+                <h1 class="landing-title">
+                    <span class="title-main">Happy Birthday</span>
+                    <span class="title-sub">(My Love ❤️)</span>
+                </h1>
+                <p class="landing-subtitle">Every memory with you became my favorite story.</p>
+                <button id="btn-begin" class="glass-button">Begin Our Journey &rarr;</button>
+            </div>
+        </section>
+
+        <!-- PAGE 2: Memory Loader -->
+        <section id="page-loader" class="page hidden">
+            <div class="loader-content">
+                <p class="loader-title">Initializing Birthday Experience...</p>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" id="progress-bar"></div>
+                </div>
+                <p class="progress-text" id="progress-text">Collecting smiles...</p>
+            </div>
+        </section>
+
+        <!-- PAGE 3 (Formerly 11): Gift Page -->
+        <section id="page-gift" class="page hidden scrollable">
+        <button class="go-back-btn" id="back-from-gift">&larr; Back</button>
+            <div class="content-wrapper">
+                <h2 class="section-title">Here's my gift for you</h2>
+                <div class="gift-container">
+                    <img src="assets/gift.jpeg" alt="My Gift To You" class="gift-image">
+                </div>
+                <div class="next-section-btn">
+                    <button id="btn-to-gallery" class="glass-button">View Gallery &darr;</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 4: Memory Gallery -->
+        <section id="page-gallery" class="page hidden scrollable">
+        <button class="go-back-btn" id="back-from-gallery">&larr; Back</button>
+            <div class="content-wrapper">
+                <h2 class="section-title">Memory Gallery</h2>
+                <div class="masonry-gallery" id="masonry-gallery"></div>
+                <div class="next-section-btn">
+                    <button id="btn-to-letter" class="glass-button">Read Letter &darr;</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Lightbox for Gallery -->
+        <div id="lightbox" class="lightbox hidden">
+            <div class="lightbox-content">
+                <button id="lightbox-close">&times;</button>
+                <div id="lightbox-img-container">
+                    <!-- Image or video will be injected here -->
+                </div>
+                <div id="lightbox-caption" class="lightbox-caption"></div>
+                <div class="lightbox-controls">
+                    <button id="lightbox-prev">&larr;</button>
+                    <button id="lightbox-next">&rarr;</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- PAGE 5: Love Letter -->
+        <section id="page-letter" class="page hidden scrollable">
+        <button class="go-back-btn" id="back-from-letter">&larr; Back</button>
+            <div class="content-wrapper letter-wrapper">
+                <div class="letter-paper">
+                    <div id="typewriter-text" class="typewriter"></div>
+                    <span class="cursor" id="typewriter-cursor">|</span>
+                    <div id="letter-signature" class="signature hidden">Forever yours,<br>Me</div>
+                </div>
+                <div class="next-section-btn">
+                    <button id="btn-to-reasons" class="glass-button hidden">100 Reasons Why &darr;</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 6: Reasons I Love You -->
+        <section id="page-reasons" class="page hidden">
+        <button class="go-back-btn" id="back-from-reasons">&larr; Back</button>
+            <div class="content-wrapper center-content">
+                <h2 class="section-title">100 Reasons I Love You</h2>
+                <div class="card-scene">
+                    <div class="reason-card" id="reason-card">
+                        <div class="card-face card-front">
+                            <p id="reason-text-front">Click to begin...</p>
+                        </div>
+                        <div class="card-face card-back">
+                            <p id="reason-text-back"></p>
+                        </div>
+                    </div>
+                </div>
+                <p class="reason-counter"><span id="reason-current">0</span> / 100</p>
+                <div class="next-section-btn">
+                    <button id="btn-to-music" class="glass-button">The song that always reminds me of you &rarr;</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 9: Music -->
+        <section id="page-music" class="page hidden">
+        <button class="go-back-btn" id="back-from-music">&larr; Back</button>
+            <div class="content-wrapper center-content music-lounge">
+                <div class="vinyl-container">
+                    <!-- Audio Element for the Song -->
+                    <audio id="bg-music" src="assets/song.mp3" loop></audio>
+                    
+                    <div class="vinyl-record" id="vinyl">
+                        <!-- Add cover.webp to the background of the label -->
+                        <div class="vinyl-label" style="background-image: url('assets/cover.webp'); background-size: cover; background-position: center;">
+                            <div class="vinyl-hole"></div>
+                        </div>
+                    </div>
+                    <div class="vinyl-needle" id="needle"></div>
+                </div>
+                
+                <div class="song-info">
+                    <h3 class="song-title">Last Night on Earth</h3>
+                    <p class="song-artist">Green Day</p>
+                    <p class="song-memory">This is the song that always reminds me of you.</p>
+                </div>
+
+                <div class="waveform" id="waveform">
+                    <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                </div>
+
+                <div class="next-section-btn">
+                    <button id="btn-to-heart" class="glass-button">My Heart &rarr;</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 10: Interactive Heart -->
+        <section id="page-heart" class="page hidden">
+        <button class="go-back-btn" id="back-from-heart">&larr; Back</button>
+            <div class="content-wrapper center-content">
+                <div class="heart-container" id="heart-btn">
+                    <div class="glass-heart">
+                        <svg viewBox="0 0 32 29.6">
+                            <path d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2
+                            c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="love-counter">
+                    <p>Love Level</p>
+                    <h2 id="love-level">1%</h2>
+                </div>
+                
+                <div class="final-message hidden" id="final-message">
+                    <h2>No number could ever measure<br>how much I love you.</h2>
+                    <h1 class="final-heading">Happy Birthday ❤️</h1>
+                    <button id="btn-replay" class="glass-button mt-4">Replay Journey</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="js/particles.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
